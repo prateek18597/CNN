@@ -16,7 +16,7 @@ def conv(X_matrix,filter):#Does convolution for a matrix and filter
 					X[j,k]+=X_matrix[j+m][k+n]*filter[m][n];
 	return X;
 
-def pool(X_matrix,filter,stride):
+def pool(X_matrix,filter,stride):#Does max pooling for X_matrix
 	n_h=math.ceil((len(X_matrix)-len(filter))/stride)+1
 	n_w=math.ceil((len(X_matrix[0])-len(filter))/stride)+1
 	X=np.zeros([n_h,n_w]);
@@ -27,6 +27,11 @@ def pool(X_matrix,filter,stride):
 					if X[j,k]<X_matrix[j+m][k+n]:
 						X[j,k]=X_matrix[j+m][k+n];	
 	return X;
+
+def fully_connected(X_matrix):
+	X = np.asarray(X_matrix).reshape(-1)
+	return X;
+
 
 def get_feature(img1,img2,y,img1_name,img2_name,value):
 	
@@ -235,4 +240,4 @@ def main():
 	print(pearsonr(y_test,y_rbf_test))
 
 # main();
-print(pool(conv([[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]],[[0,1,0],[0,1,0],[0,1,0]]),[[0,0],[0,0]],2));
+print(fully_connected(conv([[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]],[[0,1,0],[0,1,0],[0,1,0]])));
